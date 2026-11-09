@@ -1,4 +1,4 @@
-name: Python notebook CI
+name: Python notebook CI and Pages CD
 
 on:
   push:
@@ -29,3 +29,31 @@ jobs:
           NotebookClient(notebook, timeout=60, kernel_name='python3').execute()
           print('Notebook executed successfully')
           PY
+
+  deploy:
+    name: Publish HTML to GitHub Pages
+    needs: notebook
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload HTML
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

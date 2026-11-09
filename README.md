@@ -12,4 +12,16 @@ Save the notebook before committing it. CI executes the code saved in Git,
 independently of any outputs or running kernel in VS Code.
 
 Dependencies for CI are listed in `requirements-ci.txt`.
-Deployment (CD) will be added when the project has a deployment target.
+
+## Continuous deployment
+
+After CI succeeds on `main`, the same workflow publishes only the `site/`
+directory to GitHub Pages. Pull requests run CI without deploying.
+
+One-time setup: in the repository, open **Settings → Pages → Build and
+deployment**, and set **Source** to **GitHub Actions** before pushing this workflow.
+
+Commit and push `site/index.html` and the updated workflow. In **Actions**, open
+the latest run and check **Publish HTML to GitHub Pages**. The deployment
+environment links to the published site. To practice CD, change the heading in
+`site/index.html`, commit, and push again.

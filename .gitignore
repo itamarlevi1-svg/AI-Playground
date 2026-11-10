@@ -5,3 +5,6 @@ node_modules/
 !.env.example
 .venv/
 __pycache__/
+
+# Downloaded Hugging Face models
+.hf-cache/

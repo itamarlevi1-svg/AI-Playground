@@ -10,6 +10,17 @@ DistilBERT. Dependencies are recorded in `requirements-huggingface.txt`.
 The first run downloads the public model to `.hf-cache/`; no API key is needed.
 This optional notebook is separate from the CI notebook below.
 
+## Reddit scam research prototype
+
+Open `reddit_scam_research.ipynb` for a Hebrew walkthrough that classifies
+English texts by scam type and concern, then summarizes their frequency.
+It uses **synthetic examples only**, not live Reddit data. Run the optional
+installation cell if needed; dependencies are in `requirements-reddit-scam.txt`.
+The model-loading cell downloads a separate zero-shot model to `.hf-cache/`.
+Model scores and thresholds require manual validation before drawing conclusions.
+Reddit collection and scheduling are future steps, pending approved access.
+This optional notebook is not executed by CI.
+
 ## Continuous integration
 
 GitHub Actions runs `experiment.ipynb` from scratch on Python 3.15 for every

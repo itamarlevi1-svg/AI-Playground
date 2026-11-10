@@ -1,0 +1,2 @@
+-r requirements-huggingface.txt
+sentencepiece>=0.2,<0.3
